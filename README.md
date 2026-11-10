@@ -42,3 +42,10 @@ Fields are minute, hour, day-of-month, month, day-of-week. Each accepts `*`, lis
 ```
 PYTHONPATH=src python -m unittest discover -s tests
 ```
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
